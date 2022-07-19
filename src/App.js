@@ -4,9 +4,9 @@ import CardList from "./components/CardList";
 import NewBoardForm from "./components/NewBoardForm";
 import NewCardForm from "./components/NewCardForm";
 import React, { useEffect, useState } from "react";
-import axios from"axios";
+import axios from "axios";
 
-const kBaseUrl = process.env.REACT_APP_BACKEND_URL
+const kBaseUrl = process.env.REACT_APP_BACKEND_URL;
 
 const boardApiToJson = (board) => {
   const { id: boardId, title, owner } = board;
@@ -31,8 +31,8 @@ const getBoards = () => {
 };
 
 function App() {
-
-  const [boardsData, setBoardsData] = useState([])
+  const [boardsData, setBoardsData] = useState([]);
+  const [selectedBoard, updateSelectedBoard] = useState(null);
 
   const updateBoardData = () => {
     return getBoards()
@@ -48,10 +48,15 @@ function App() {
     updateBoardData();
   }, []);
 
+  const onBoardSelect = (boardId) => {
+    updateSelectedBoard(boardId);
+  };
+
   return (
     <main>
-      <BoardList boards={boardsData} onBoardSelect={() => console.log("test")} />
+      <BoardList boards={boardsData} onBoardSelect={onBoardSelect} />
     </main>
-};
+  );
+}
 
 export default App;

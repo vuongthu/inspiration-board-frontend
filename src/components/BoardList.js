@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const BoardList = ({ boards, onBoardSelect }) => {
+  const handleOnSelect = (event) => {
+    onBoardSelect(event.target.value);
+  };
+
   const options = boards.map((board) => {
     return (
       <option key={board.boardId} value={board.boardId}>
@@ -13,7 +17,7 @@ const BoardList = ({ boards, onBoardSelect }) => {
   return (
     <div>
       <label htmlFor="boards">select a board</label>
-      <select name="boards">
+      <select onChange={handleOnSelect} name="boards">
         <option></option>
         {options}
       </select>
