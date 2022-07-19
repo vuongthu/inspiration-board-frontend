@@ -79,14 +79,11 @@ const patchLikeCard = (cardId) => {
 };
 
 const deleteCard = (cardId) => {
-  return axios
-    .delete(${kBaseUrl}/cards/${cardId})
-    .catch((err) => {
-      console.log(err);
-      throw new Error(`Error removing card ${cardId}: ${err}`);
-    });
+  return axios.delete(`${kBaseUrl}/cards/${cardId}`).catch((err) => {
+    console.log(err);
+    throw new Error(`Error removing card ${cardId}: ${err}`);
+  });
 };
-
 
 function App() {
   const [boardsData, setBoardsData] = useState([]);
@@ -119,15 +116,76 @@ function App() {
     } else {
       setCardsData([]);
     }
-  }, [selectedBoard])
+  }, [selectedBoard]);
 
   const onBoardSelect = (boardId) => {
     updateSelectedBoard(boardId);
   };
 
+  const addBoard = (data) => {
+    postBoard(data)
+      .then((board) => {
+        setBoardsData((oldData) => {
+          return [...oldData, board];
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const addCard = (data) => {
+    postCard(selectedBoard, data)
+      .then((card) => {
+        setCardsData((oldData) => {
+          return [...oldData, card];
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const onDeleteCard = (cardId) => {
+    deleteCard(cardId)
+      .then(() => {
+        setCardsData((oldData) =>
+          oldData.filter((card) => card.cardId !== cardId)
+        );
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const onLikeCard = (cardId) => {
+    patchLikeCard(cardId)
+      .then((card) => {
+        setCardsData((oldData) =>
+          oldData.map((oldCard) => {
+            if (oldCard.cardId === cardId) {
+              return card;
+            } else {
+              return oldCard;
+            }
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   return (
     <main>
       <BoardList boards={boardsData} onBoardSelect={onBoardSelect} />
+      <CardList
+        cards={cardsData}
+        onDeleteCard={onDeleteCard}
+        onLikeCard={onLikeCard}
+      />
+      <NewBoardForm onBoardFormSubmit={addBoard} />
+      <NewCardForm onCardFormSubmit={addCard} />
     </main>
   );
 }
