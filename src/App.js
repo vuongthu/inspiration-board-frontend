@@ -30,8 +30,67 @@ const getBoards = () => {
     });
 };
 
+const postBoard = (newBoard) => {
+  return axios
+    .post(`${kBaseUrl}/boards`, newBoard)
+    .then((response) => {
+      return boardApiToJson(response.data.board);
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error(`Error posting board ${newBoard}: ${err}`);
+    });
+};
+
+const getCards = (boardId) => {
+  return axios
+    .get(`${kBaseUrl}/boards/${boardId}/cards`)
+    .then((response) => {
+      return response.data.map(cardApiToJson);
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error(`Error fetching cards: ${err}`);
+    });
+};
+
+const postCard = (boardId, newCard) => {
+  return axios
+    .post(`${kBaseUrl}/boards/${boardId}/cards`, newCard)
+    .then((response) => {
+      return cardApiToJson(response.data.card);
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error(`Error posting card ${newCard}: ${err}`);
+    });
+};
+
+const patchLikeCard = (cardId) => {
+  return axios
+    .patch(`${kBaseUrl}/cards/${cardId}/like`)
+    .then((response) => {
+      return cardApiToJson(response.data.card);
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error(`Error liking card ${cardId}: ${err}`);
+    });
+};
+
+const deleteCard = (cardId) => {
+  return axios
+    .delete(${kBaseUrl}/cards/${cardId})
+    .catch((err) => {
+      console.log(err);
+      throw new Error(`Error removing card ${cardId}: ${err}`);
+    });
+};
+
+
 function App() {
   const [boardsData, setBoardsData] = useState([]);
+  const [cardsData, setCardsData] = useState([]);
   const [selectedBoard, updateSelectedBoard] = useState(null);
 
   const updateBoardData = () => {
@@ -47,6 +106,20 @@ function App() {
   useEffect(() => {
     updateBoardData();
   }, []);
+
+  useEffect(() => {
+    if (selectedBoard) {
+      getCards(selectedBoard)
+        .then((cards) => {
+          setCardsData(cards);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } else {
+      setCardsData([]);
+    }
+  }, [selectedBoard])
 
   const onBoardSelect = (boardId) => {
     updateSelectedBoard(boardId);
