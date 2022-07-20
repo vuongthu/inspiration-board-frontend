@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import "./Forms.css";
 
 const kDefaultFormState = {
   message: "",
@@ -7,6 +8,7 @@ const kDefaultFormState = {
 
 const NewCardForm = ({ onCardFormSubmit, onToggleVisible }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
+  const [isFormValid, setFormValid] = useState(false);
 
   const handleChange = (event) => {
     const fieldName = event.target.name;
@@ -15,12 +17,14 @@ const NewCardForm = ({ onCardFormSubmit, onToggleVisible }) => {
     const newFormData = { ...formData, [fieldName]: fieldValue };
 
     setFormData(newFormData);
+    setFormValid(fieldValue ? fieldValue.length <= 40 : false);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onCardFormSubmit(formData);
     setFormData(kDefaultFormState);
+    setFormValid(false);
     onToggleVisible();
   };
 
@@ -34,6 +38,7 @@ const NewCardForm = ({ onCardFormSubmit, onToggleVisible }) => {
             name="message"
             value={formData.message}
             onChange={handleChange}
+            className={isFormValid ? "" : "input--state-danger"}
           ></input>
         </div>
         <div>

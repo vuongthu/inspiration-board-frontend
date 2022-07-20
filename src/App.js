@@ -5,6 +5,7 @@ import NewBoardForm from "./components/NewBoardForm";
 import NewCardForm from "./components/NewCardForm";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const kBaseUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -192,6 +193,9 @@ function App() {
 
   return (
     <main>
+      <nav className="nav">
+        <Link to="/inspiration">inspiration</Link>
+      </nav>
       <BoardList boards={boardsData} onBoardSelect={onBoardSelect} />
       <button className="btn" onClick={toggleBoardForm}>
         create new board
