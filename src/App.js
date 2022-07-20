@@ -54,9 +54,9 @@ const getCards = (boardId) => {
     });
 };
 
-const postCard = (boardId, newCard) => {
+const postCard = (board, newCard) => {
   return axios
-    .post(`${kBaseUrl}/boards/${boardId}/cards`, newCard)
+    .post(`${kBaseUrl}/boards/${board.boardId}/cards`, newCard)
     .then((response) => {
       return cardApiToJson(response.data.card);
     })
@@ -88,7 +88,11 @@ const deleteCard = (cardId) => {
 function App() {
   const [boardsData, setBoardsData] = useState([]);
   const [cardsData, setCardsData] = useState([]);
-  const [selectedBoard, updateSelectedBoard] = useState(null);
+  const [selectedBoard, updateSelectedBoard] = useState({
+    boardId: null,
+    title: "",
+    owner: "",
+  });
 
   const updateBoardData = () => {
     return getBoards()
@@ -105,8 +109,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (selectedBoard) {
-      getCards(selectedBoard)
+    if (selectedBoard.boardId) {
+      getCards(selectedBoard.boardId)
         .then((cards) => {
           setCardsData(cards);
         })
@@ -118,8 +122,8 @@ function App() {
     }
   }, [selectedBoard]);
 
-  const onBoardSelect = (boardId) => {
-    updateSelectedBoard(boardId);
+  const onBoardSelect = (board) => {
+    updateSelectedBoard(board);
   };
 
   const addBoard = (data) => {
@@ -179,13 +183,15 @@ function App() {
   return (
     <main>
       <BoardList boards={boardsData} onBoardSelect={onBoardSelect} />
+      <button className="btn">create new board</button>
+      <button className="btn">add a new card</button>
+      <NewBoardForm onBoardFormSubmit={addBoard} />
+      <NewCardForm onCardFormSubmit={addCard} />
       <CardList
         cards={cardsData}
         onDeleteCard={onDeleteCard}
         onLikeCard={onLikeCard}
       />
-      <NewBoardForm onBoardFormSubmit={addBoard} />
-      <NewCardForm onCardFormSubmit={addCard} />
     </main>
   );
 }

@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 const BoardList = ({ boards, onBoardSelect }) => {
   const handleOnSelect = (event) => {
-    onBoardSelect(event.target.value);
+    onBoardSelect(JSON.parse(event.target.value));
   };
 
   const options = boards.map((board) => {
     return (
-      <option key={board.boardId} value={board.boardId}>
+      <option key={board.boardId} value={JSON.stringify(board)}>
         {board.title} - {board.owner}
       </option>
     );
