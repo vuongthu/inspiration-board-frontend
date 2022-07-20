@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./BoardList.css";
 
 const BoardList = ({ boards, onBoardSelect }) => {
   const handleOnSelect = (event) => {
@@ -16,7 +17,11 @@ const BoardList = ({ boards, onBoardSelect }) => {
 
   return (
     <div>
-      <select onChange={handleOnSelect} name="boards">
+      <select
+        className="board-selection-dropdown"
+        onChange={handleOnSelect}
+        name="boards"
+      >
         <option>select a board</option>
         {options}
       </select>

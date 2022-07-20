@@ -32,17 +32,24 @@ const NewCardForm = ({ onCardFormSubmit, onToggleVisible }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>message:</label>
+          <label className="form-label">message:</label>
           <input
             type="text"
             name="message"
             value={formData.message}
             onChange={handleChange}
-            className={isFormValid ? "" : "input--state-danger"}
+            className={
+              isFormValid ? "input--state-success" : "input--state-danger"
+            }
           ></input>
         </div>
         <div>
-          <input type="submit" value="add card"></input>
+          <input
+            type="submit"
+            value="add card"
+            disabled={!isFormValid}
+            className="submit-button"
+          ></input>
         </div>
       </form>
     </div>

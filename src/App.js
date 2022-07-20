@@ -225,6 +225,7 @@ function App() {
             ""
           )}
         </div>
+        <h2>{selectedBoard.title}</h2>
         <CardList
           cards={cardsData}
           onDeleteCard={onDeleteCard}
