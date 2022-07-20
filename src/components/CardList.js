@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
+import "./CardList.css";
 
 const CardList = ({ cards, onDeleteCard, onLikeCard }) => {
   const cardsList = cards.map((card) => {
@@ -16,7 +17,7 @@ const CardList = ({ cards, onDeleteCard, onLikeCard }) => {
     );
   });
 
-  return <div>{cardsList}</div>;
+  return <div className="cards-container">{cardsList}</div>;
 };
 
 CardList.propTypes = {

@@ -196,36 +196,42 @@ function App() {
       <nav className="nav">
         <Link to="/inspiration">inspiration</Link>
       </nav>
-      <BoardList boards={boardsData} onBoardSelect={onBoardSelect} />
-      <button className="btn" onClick={toggleBoardForm}>
-        create new board
-      </button>
-      <button className="btn" onClick={toggleCardForm}>
-        add a new card
-      </button>
-      <div className="forms-container">
-        {isBoardFormVisible ? (
-          <NewBoardForm
-            onBoardFormSubmit={addBoard}
-            onToggleVisible={toggleBoardForm}
-          />
-        ) : (
-          ""
-        )}
-        {isCardFormVisible ? (
-          <NewCardForm
-            onCardFormSubmit={addCard}
-            onToggleVisible={toggleCardForm}
-          />
-        ) : (
-          ""
-        )}
+      <h1>nostalgia</h1>
+      <div className="content-container">
+        <div className="selection-container">
+          <BoardList boards={boardsData} onBoardSelect={onBoardSelect} />
+          <button className="btn" onClick={toggleBoardForm}>
+            create new board
+          </button>
+          <button className="btn" onClick={toggleCardForm}>
+            add a new card
+          </button>
+        </div>
+        <div className="forms-container">
+          {isBoardFormVisible ? (
+            <NewBoardForm
+              onBoardFormSubmit={addBoard}
+              onToggleVisible={toggleBoardForm}
+            />
+          ) : (
+            ""
+          )}
+          {isCardFormVisible ? (
+            <NewCardForm
+              onCardFormSubmit={addCard}
+              onToggleVisible={toggleCardForm}
+            />
+          ) : (
+            ""
+          )}
+        </div>
+        <h2>{selectedBoard.title}</h2>
+        <CardList
+          cards={cardsData}
+          onDeleteCard={onDeleteCard}
+          onLikeCard={onLikeCard}
+        />
       </div>
-      <CardList
-        cards={cardsData}
-        onDeleteCard={onDeleteCard}
-        onLikeCard={onLikeCard}
-      />
     </main>
   );
 }

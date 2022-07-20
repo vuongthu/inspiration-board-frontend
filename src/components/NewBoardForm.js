@@ -47,27 +47,36 @@ const NewBoardForm = ({ onBoardFormSubmit, onToggleVisible }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>title:</label>
+          <label className="form-label">title:</label>
           <input
             type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className={isFormValid.title ? "" : "input--state-danger"}
+            className={
+              isFormValid.title ? "input--state-success" : "input--state-danger"
+            }
           ></input>
         </div>
         <div>
-          <label>owner:</label>
+          <label className="form-label">owner:</label>
           <input
             type="text"
             name="owner"
             value={formData.owner}
             onChange={handleChange}
-            className={isFormValid.owner ? "" : "input--state-danger"}
+            className={
+              isFormValid.owner ? "input--state-success" : "input--state-danger"
+            }
           ></input>
         </div>
         <div>
-          <input type="submit" value="add board"></input>
+          <input
+            type="submit"
+            value="add board"
+            disabled={!(isFormValid.title && isFormValid.owner)}
+            className="submit-button"
+          ></input>
         </div>
       </form>
     </div>
