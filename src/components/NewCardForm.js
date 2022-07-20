@@ -5,7 +5,7 @@ const kDefaultFormState = {
   message: "",
 };
 
-const NewCardForm = ({ onCardFormSubmit }) => {
+const NewCardForm = ({ onCardFormSubmit, onToggleVisible }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
 
   const handleChange = (event) => {
@@ -21,6 +21,7 @@ const NewCardForm = ({ onCardFormSubmit }) => {
     event.preventDefault();
     onCardFormSubmit(formData);
     setFormData(kDefaultFormState);
+    onToggleVisible();
   };
 
   return (
@@ -45,6 +46,7 @@ const NewCardForm = ({ onCardFormSubmit }) => {
 
 NewCardForm.propTypes = {
   onCardFormSubmit: PropTypes.func.isRequired,
+  onToggleVisible: PropTypes.func.isRequired,
 };
 
 export default NewCardForm;

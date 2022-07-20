@@ -93,6 +93,8 @@ function App() {
     title: "",
     owner: "",
   });
+  const [isBoardFormVisible, updateBoardFormVisibility] = useState(false);
+  const [isCardFormVisible, updateCardFormVisibility] = useState(false);
 
   const updateBoardData = () => {
     return getBoards()
@@ -180,13 +182,41 @@ function App() {
       });
   };
 
+  const toggleBoardForm = () => {
+    updateBoardFormVisibility((visible) => !visible);
+  };
+
+  const toggleCardForm = () => {
+    updateCardFormVisibility((visible) => !visible);
+  };
+
   return (
     <main>
       <BoardList boards={boardsData} onBoardSelect={onBoardSelect} />
-      <button className="btn">create new board</button>
-      <button className="btn">add a new card</button>
-      <NewBoardForm onBoardFormSubmit={addBoard} />
-      <NewCardForm onCardFormSubmit={addCard} />
+      <button className="btn" onClick={toggleBoardForm}>
+        create new board
+      </button>
+      <button className="btn" onClick={toggleCardForm}>
+        add a new card
+      </button>
+      <div className="forms-container">
+        {isBoardFormVisible ? (
+          <NewBoardForm
+            onBoardFormSubmit={addBoard}
+            onToggleVisible={toggleBoardForm}
+          />
+        ) : (
+          ""
+        )}
+        {isCardFormVisible ? (
+          <NewCardForm
+            onCardFormSubmit={addCard}
+            onToggleVisible={toggleCardForm}
+          />
+        ) : (
+          ""
+        )}
+      </div>
       <CardList
         cards={cardsData}
         onDeleteCard={onDeleteCard}

@@ -1,0 +1,4 @@
+.input--state-danger {
+    border: red solid 0.1em;
+    box-shadow: 0 0 0.5em red;
+}
