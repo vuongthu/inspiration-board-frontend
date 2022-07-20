@@ -16,9 +16,8 @@ const BoardList = ({ boards, onBoardSelect }) => {
 
   return (
     <div>
-      <label htmlFor="boards">select a board</label>
       <select onChange={handleOnSelect} name="boards">
-        <option></option>
+        <option>select a board</option>
         {options}
       </select>
     </div>
