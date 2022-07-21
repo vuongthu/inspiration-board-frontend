@@ -1,3 +1,11 @@
+# Attributes
+
+X Icon: [Freepik](https://www.flaticon.com/free-icon/cross_87251?related_id=87251)
+
+Heart Icon: [Icons8](https://icons8.com/icon/16424/favorite)
+
+Photos were sourced from [Unsplash](https://unsplash.com/) and [Pexels](https://www.pexels.com)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
