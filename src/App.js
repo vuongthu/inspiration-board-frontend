@@ -232,6 +232,9 @@ function App() {
           onLikeCard={onLikeCard}
         />
       </div>
+      <footer>
+        <p id="disclaimer">© Team Nostalgia 2022 All Rights Reserved</p>
+      </footer>
     </main>
   );
 }

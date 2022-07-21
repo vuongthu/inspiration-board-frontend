@@ -17,7 +17,7 @@ const NewCardForm = ({ onCardFormSubmit, onToggleVisible }) => {
     const newFormData = { ...formData, [fieldName]: fieldValue };
 
     setFormData(newFormData);
-    setFormValid(fieldValue ? fieldValue.length <= 40 : false);
+    setFormValid(fieldValue ? fieldValue.length <= 100 : false);
   };
 
   const handleSubmit = (event) => {
