@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Inspiration from "./routes/Inspiration";
+import Capsule from "./routes/Capsule";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -12,7 +12,7 @@ root.render(
     <React.StrictMode>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="inspiration" element={<Inspiration />} />
+        <Route path="capsule" element={<Capsule />} />
       </Routes>
     </React.StrictMode>
   </BrowserRouter>

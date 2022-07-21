@@ -194,7 +194,7 @@ function App() {
   return (
     <main>
       <nav className="nav">
-        <Link to="/inspiration">inspiration</Link>
+        <Link to="/capsule">time capsule</Link>
       </nav>
       <h1>nostalgia</h1>
       <div className="content-container">

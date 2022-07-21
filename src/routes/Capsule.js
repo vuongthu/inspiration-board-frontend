@@ -1,15 +1,15 @@
 import React from "react";
-import "./Inspiration.css";
+import "./Capsule.css";
 import { Link } from "react-router-dom";
 
-const Inspiration = () => {
+const Capsule = () => {
   return (
     <main>
       <nav className="nav">
         <Link to="/">home</Link>
       </nav>
       <h1>take me back in time</h1>
-      <div className="inspiration-container">
+      <div className="capsule-container">
         <img src={require("../images/arcade.jpg")} alt="arcade" />
         <img src={require("../images/cars.jpg")} alt="cars" />
         <img src={require("../images/cassette-tapes.jpg")} alt="cassettes" />
@@ -27,4 +27,4 @@ const Inspiration = () => {
   );
 };
 
-export default Inspiration;
+export default Capsule;
